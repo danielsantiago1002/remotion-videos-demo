@@ -7,8 +7,9 @@
   "private": true,
   "dependencies": {
     "@remotion/cli": "4.0.384",
-    "@remotion/google-fonts": "4.0.384",
+    "@remotion/google-fonts": "^4.0.384",
     "@remotion/noise": "^4.0.384",
+    "@remotion/transitions": "^4.0.386",
     "@remotion/zod-types": "4.0.384",
     "react": "19.0.0",
     "react-dom": "19.0.0",

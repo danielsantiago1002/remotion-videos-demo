@@ -1,28 +1,16 @@
 import { Composition } from "remotion";
-import { NoiseComp } from "./noise-example/NoiseComp";
-
-// Each <Composition> is an entry in the sidebar!
+import { ChartComp } from "./chart/ChartComp";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Composition
-        // You can take the "id" to render a video:
-        // npx remotion render HelloWorld
-        id="HelloWorld"
-        component={NoiseComp}
-        durationInFrames={150}
+        id="ChartComp"
+        component={ChartComp}
+        durationInFrames={(30) * (10)}
         fps={30}
-        width={1920}
+        width={1080}
         height={1080}
-        // You can override these props for each render:
-        // https://www.remotion.dev/docs/parametrized-rendering
-        // schema={myCompSchema}
-        defaultProps={{
-          speed: 0.02,
-          circleRadius: 8,
-          maxOffset: 80,
-        }}
       />
     </>
   );

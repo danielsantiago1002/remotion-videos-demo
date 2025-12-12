@@ -17,13 +17,15 @@ export const Chart = () => {
   const thirdInterval = getIntervalSeconds(3);
   const fourthInterval = getIntervalSeconds(4);
   const fifthInterval = getIntervalSeconds(5);
+  const sixthInterval = getIntervalSeconds(6);
+  const seventhInterval = getIntervalSeconds(7);
 
   const displayProperty = (startFrame: number) => {
     return !!frame && frame < startFrame ? 'none' : undefined;
   };
 
   const defineHideDisplayProperty = (startFrame: number) => {
-    return !!frame && frame > (startFrame + (fps * 4)) ? 'none' : undefined;
+    return !!frame && frame >= startFrame && frame < (startFrame + (fps * 4)) ? undefined : 'none';
   };
 
   const defineFilter = (startFrame: number) => {
@@ -40,17 +42,21 @@ export const Chart = () => {
     filter: baseFilter,
   };
 
+  const baseContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    fontFamily: loadFont().fontFamily,
+    backgroundColor: 'black',
+    color: FONT_COLOR_LIGHT,
+    fontSize: 60,
+  }
+
   return (<>
     <div
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        fontFamily: loadFont().fontFamily,
-        backgroundColor: 'black',
-        color: FONT_COLOR_LIGHT,
-        fontSize: 60,
+        ...baseContainerStyle,
       }}
     >
       <div
@@ -60,7 +66,8 @@ export const Chart = () => {
           alignSelf: "flex-start",
           width: "100%",
           paddingTop: 100,
-          paddingInline: 80
+          paddingInline: 80,
+          display: seventhInterval <= frame ? 'none' : undefined,
         }}
       >
         <div
@@ -68,11 +75,116 @@ export const Chart = () => {
             display: defineHideDisplayProperty(0),
           }}
         >
-          {`1) asdasd asdasd asdasd asdasd  asdasd asdasd`}
+          {`We can represent the Life Cycle of an Oil/Gas Reservoir in phases`}
+        </div>
+
+        <div
+          style={{
+            display: defineHideDisplayProperty(firstInterval),
+          }}
+        >
+          {`1) Exploration & Appraisal: Information is collected`}
+        </div>
+
+        <div
+          style={{
+            display: defineHideDisplayProperty(secondInterval)
+          }}
+        >
+          {`An appraisal Well is drilled to determine reservoir properties`}
+        </div>
+
+        <div
+          style={{
+            display: defineHideDisplayProperty(thirdInterval)
+          }}>
+          {`2) Development: Facilities are built, the first oil is produced`}
+        </div>
+
+        <div
+          style={{
+            display: defineHideDisplayProperty(fourthInterval)
+          }}
+        >
+          {`3) Production: Oil is extracted, transported, and managed`}
+        </div>
+
+        <div
+          style={{
+            display: defineHideDisplayProperty(fifthInterval)
+          }}
+        >
+          {`4) Abandonment: Operations continue until the field is no longer economical`}
+        </div>
+
+        <div
+          style={{
+            display: defineHideDisplayProperty(sixthInterval)
+          }}
+        >
+          {`Knowing these phases helps optimize reservoir management and maximize recovery.`}
+        </div>
+      </div>
+
+      <div
+        style={{
+          display: seventhInterval > frame ? 'none' : undefined,
+          textAlign: "center",
+          width: "100%",
+          fontSize: 70,
+        }}
+      >
+        <div>
+          Thanks for watching! 😊
+        </div>
+
+        <div
+          style={{
+            paddingTop: "40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            fontSize: "50px",
+          }}
+        >
+          <Img
+            id="linkedin"
+            style={{
+              width: 80,
+            }}
+            src={staticFile('reservoir-life-cycle/linkedin-svgrepo-com.svg')}
+          />
+          linkedin.com/in/danielavila1002
+        </div>
+
+        <div
+          style={{
+            paddingTop: "40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+            fontSize: "50px",
+          }}
+        >
+          <Img
+            id="github"
+            style={{
+              width: 80,
+            }}
+            src={staticFile('reservoir-life-cycle/github-svgrepo-com.svg')}
+          />
+          github.com/danielsantiago1002
         </div>
       </div>
     </div>
-    <AbsoluteFill>
+
+    <AbsoluteFill
+      style={{
+        display: seventhInterval <= frame ? 'none' : undefined,
+      }}
+    >
       <Img
         id="axis-image"
         style={{

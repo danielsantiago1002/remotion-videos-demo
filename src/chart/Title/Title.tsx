@@ -1,16 +1,17 @@
 import { BACKGROUND_COLOR_DARK, FONT_COLOR_LIGHT } from "../utils";
 import { loadFont } from '@remotion/google-fonts/Roboto';
-import { interpolate, useCurrentFrame } from "remotion";
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
 export const Title = () => {
+  const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
 
-  const opacityTitle = interpolate(frame, [0, (30 * 0.5)], [0, 1], {
+  const opacityTitle = interpolate(frame, [0, (fps * 0.5)], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const twoSecondsInFrames = 30 * 2.5;
+  const twoSecondsInFrames = fps * 2.5;
 
   return (
     <div style={{

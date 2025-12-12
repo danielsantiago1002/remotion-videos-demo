@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
 import { ChartComp } from "./chart/ChartComp";
+const fps = 30;
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -7,8 +8,8 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="ChartComp"
         component={ChartComp}
-        durationInFrames={(30) * (10)}
-        fps={30}
+        durationInFrames={(fps) * (37)}
+        fps={fps}
         width={1080}
         height={1080}
       />

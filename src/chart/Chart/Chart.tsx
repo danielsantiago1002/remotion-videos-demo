@@ -114,7 +114,7 @@ export const Chart = () => {
             display: defineHideDisplayProperty(fifthInterval)
           }}
         >
-          {`4) Abandonment: Operations continue until the field is no longer economical`}
+          {`4) Abandonment: Operations continue until the field is no longer economical, culminating in wells abandonment.`}
         </div>
 
         <div

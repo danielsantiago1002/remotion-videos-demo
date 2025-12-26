@@ -1,49 +1,35 @@
-import { noise3D } from "@remotion/noise";
-import React from "react";
-import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
- 
-const OVERSCAN_MARGIN = 100;
-const ROWS = 10;
-const COLS = 15;
- 
-export const NoiseComp: React.FC<{
-  speed: number;
-  circleRadius: number;
-  maxOffset: number;
-}> = ({ speed, circleRadius, maxOffset }) => {
-  const frame = useCurrentFrame();
-  const { height, width } = useVideoConfig();
- 
+import { AbsoluteFill } from "remotion";
+import gsap from "gsap";
+import { useRef } from "react";
+import { useGsapTimeline } from "../hooks/useGsapTimeline";
+
+export const NoiseComp = () => {
+  const squareRef = useRef(null);
+  const animationBoxRef = useGsapTimeline<HTMLDivElement>(() =>
+    gsap
+      .timeline()
+      .fromTo(squareRef.current, { opacity: 0 }, { x: 810, opacity: 1 })
+      .to(squareRef.current, {
+        background: "yellow",
+        rotate: 90,
+        keyframes: [{ scale: 1.5 }, { scale: 1 }]
+      })
+      .to(squareRef.current, { opacity: 0, x: 1920 })
+  );
+
   return (
-    <svg width={width} height={height}>
-      {new Array(COLS).fill(0).map((_, i) =>
-        new Array(ROWS).fill(0).map((__, j) => {
-          const x = i * ((width + OVERSCAN_MARGIN) / COLS);
-          const y = j * ((height + OVERSCAN_MARGIN) / ROWS);
-          const px = i / COLS;
-          const py = j / ROWS;
-          const dx = noise3D("x", px, py, frame * speed) * maxOffset;
-          const dy = noise3D("y", px, py, frame * speed) * maxOffset;
-          const opacity = interpolate(
-            noise3D("opacity", i, j, frame * speed),
-            [-1, 1],
-            [0, 1]
-          );
- 
-          const key = `${i}-${j}`;
- 
-          return (
-            <circle
-              key={key}
-              cx={x + dx}
-              cy={y + dy}
-              r={circleRadius}
-              fill="gray"
-              opacity={opacity}
-            />
-          );
-        })
-      )}
-    </svg>
+    <AbsoluteFill
+      ref={animationBoxRef}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        background: "#efefef"
+      }}
+    >
+      <div
+        ref={squareRef}
+        style={{ width: 300, height: 300, background: "#3E85C7" }}
+      />
+    </AbsoluteFill>
   );
 };

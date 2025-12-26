@@ -6,10 +6,12 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@remotion/cli": "4.0.384",
     "@remotion/google-fonts": "4.0.384",
     "@remotion/noise": "^4.0.384",
     "@remotion/zod-types": "4.0.384",
+    "gsap": "^3.14.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "remotion": "4.0.384",
